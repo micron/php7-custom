@@ -27,4 +27,4 @@ RUN set -ex; \
     pecl install intl; \
     docker-php-ext-install intl
 
-EXPOSE 9000%
+EXPOSE 9000
