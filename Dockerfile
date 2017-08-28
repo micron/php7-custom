@@ -1,4 +1,4 @@
-FROM php:7.0.14-fpm
+FROM php:7.1.8-fpm
 MAINTAINER miron.ogrodowicz@kreativrudel.de
 
 RUN set -ex; \
@@ -21,10 +21,8 @@ RUN set -ex; \
     pecl install xdebug; \
     docker-php-ext-enable xdebug; \
     \
-    pecl install phar; \
     docker-php-ext-install phar; \
     \
-    pecl install intl; \
     docker-php-ext-install intl
 
 EXPOSE 9000
