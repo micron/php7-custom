@@ -10,6 +10,8 @@ RUN set -ex; \
         libssl-dev \
         libicu-dev \
         libfreetype6-dev \
+        zlib1g-dev \
+        libzip-dev \
     ; \
     rm -rf /var/lib/apt/lists/*; \
     mkdir -p /usr/include/freetype2/freetype; \
@@ -18,13 +20,11 @@ RUN set -ex; \
     docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr --with-freetype-dir=/usr/include/freetype2/freetype; \
     docker-php-ext-install gd mysqli opcache; \
     \
+    docker-php-ext-install zip; \
+    \
     pecl install xdebug; \
     docker-php-ext-enable xdebug; \
     \
-    pecl install phar; \
-    docker-php-ext-install phar; \
-    \
-    pecl install intl; \
     docker-php-ext-install intl
 
 EXPOSE 9000
