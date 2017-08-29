@@ -10,6 +10,8 @@ RUN set -ex; \
         libssl-dev \
         libicu-dev \
         libfreetype6-dev \
+        zlib1g-dev \
+        libzip-dev \
     ; \
     rm -rf /var/lib/apt/lists/*; \
     mkdir -p /usr/include/freetype2/freetype; \
@@ -21,7 +23,7 @@ RUN set -ex; \
     pecl install xdebug; \
     docker-php-ext-enable xdebug; \
     \
-    docker-php-ext-install phar; \
+    docker-php-ext-install zip; \
     \
     docker-php-ext-install intl
 
