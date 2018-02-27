@@ -12,6 +12,7 @@ RUN set -ex; \
         libfreetype6-dev \
         zlib1g-dev \
         libzip-dev \
+        libmemcached-dev \
     ; \
     rm -rf /var/lib/apt/lists/*; \
     mkdir -p /usr/include/freetype2/freetype; \
@@ -25,6 +26,11 @@ RUN set -ex; \
     \
     docker-php-ext-install zip; \
     \
-    docker-php-ext-install intl
+    docker-php-ext-install intl; \
+    \
+    pecl install memcached-3.0.3; \
+    docker-php-ext-enable memcached; \
+    \
+    docker-php-ext-install pdo_mysql;
 
 EXPOSE 9000
