@@ -25,6 +25,8 @@ RUN set -ex; \
     pecl install xdebug; \
     docker-php-ext-enable xdebug; \
     \
-    docker-php-ext-install intl
+    docker-php-ext-install intl; \
+    \
+    docker-php-ext-install pdo_mysql;
 
 EXPOSE 9000
