@@ -1,4 +1,4 @@
-FROM php:7.0.14-fpm
+FROM php:7.2.4-fpm
 MAINTAINER miron.ogrodowicz@kreativrudel.de
 
 RUN set -ex; \
@@ -6,14 +6,16 @@ RUN set -ex; \
     apt-get update; \
     apt-get install -y \
         libjpeg-dev \
-        libpng12-dev \
+        libpng-dev \
         libssl-dev \
         libicu-dev \
         libfreetype6-dev \
+        zlib1g-dev \
+        libzip-dev \
+        libmcrypt-dev \
     ; \
     rm -rf /var/lib/apt/lists/*; \
     mkdir -p /usr/include/freetype2/freetype; \
-    ln -s /usr/include/freetype2/freetype.h /usr/include/freetype2/freetype/freetype.h; \
     \
     docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr --with-freetype-dir=/usr/include/freetype2/freetype; \
     docker-php-ext-install gd mysqli opcache; \
@@ -21,10 +23,12 @@ RUN set -ex; \
     pecl install xdebug; \
     docker-php-ext-enable xdebug; \
     \
-    pecl install phar; \
-    docker-php-ext-install phar; \
+    docker-php-ext-install zip; \
     \
-    pecl install intl; \
-    docker-php-ext-install intl
+    docker-php-ext-install intl; \
+    \
+    docker-php-ext-install pdo_mysql;
+    \
+    docker-php-ext-install mcrypt
 
-EXPOSE 9000%
+EXPOSE 9000
