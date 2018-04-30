@@ -27,8 +27,8 @@ RUN set -ex; \
     \
     docker-php-ext-install intl; \
     \
-    docker-php-ext-install pdo_mysql;
+    docker-php-ext-install pdo_mysql; \
     \
-    docker-php-ext-install mcrypt
-
+pecl install mcrypt-1.0.1 \
+docker-php-ext-enable mcrypt \
 EXPOSE 9000
