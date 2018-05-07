@@ -1,2 +1,8 @@
-Dockerfile for [Dockerimage](https://hub.docker.com/r/cptnk/php7mcyrpt/) forked from [Micron](https://github.com/micron/php7-custom) v7.2
+# Available versions
+
+* PHP 7.2.4 FPM => `miron/php7-custom:latest`
+* PHP 7.1.8 FPM => `miron/php7-custom:7.1`
+* PHP 7.0.14 FPM => `miron/php7-custom:7.0`
+
+Dockerfile for [Dockerimage](https://hub.docker.com/r/miron/php7-custom/)
 
