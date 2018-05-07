@@ -12,6 +12,7 @@ RUN set -ex; \
         libfreetype6-dev \
         zlib1g-dev \
         libzip-dev \
+        libmcrypt-dev \
     ; \
     rm -rf /var/lib/apt/lists/*; \
     mkdir -p /usr/include/freetype2/freetype; \
@@ -26,6 +27,8 @@ RUN set -ex; \
     \
     docker-php-ext-install intl; \
     \
-    docker-php-ext-install pdo_mysql;
-
+    docker-php-ext-install pdo_mysql; \
+    \
+pecl install mcrypt-1.0.1 \
+docker-php-ext-enable mcrypt \
 EXPOSE 9000
