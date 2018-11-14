@@ -28,4 +28,18 @@ RUN set -ex; \
     \
     docker-php-ext-install pdo_mysql;
 
+RUN set -ex; \
+    \
+    cd /tmp; \
+    curl -L -O https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmail_linux_amd64; \
+    mv mhsendmail_linux_amd64 /usr/bin/mhsendmail; \
+    echo 'sendmail_path = /usr/bin/mhsendmail --smtp-addr mailhog:1025' > /usr/local/etc/php/php.ini
+
+RUN set -ex; \
+    \
+    cd /tmp; \
+    curl -L -O https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmail_linux_amd64; \
+    mv mhsendmail_linux_amd64 /usr/bin/mhsendmail; \
+    echo 'sendmail_path = /usr/bin/mhsendmail --smtp-addr mailhog:1025' > /usr/local/etc/php/php.ini    
+
 EXPOSE 9000
