@@ -30,7 +30,7 @@ RUN set -ex; \
     \
     docker-php-ext-install pdo_mysql; \
     \
-    pecl install mcrypt-1.0.1 \
+    pecl install mcrypt-1.0.0 \
     docker-php-ext-enable mcrypt
 
 RUN set -ex; \
