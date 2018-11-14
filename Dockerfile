@@ -12,6 +12,7 @@ RUN set -ex; \
         libfreetype6-dev \
         zlib1g-dev \
         libzip-dev \
+        libmcrypt-dev \
     ; \
     rm -rf /var/lib/apt/lists/*; \
     mkdir -p /usr/include/freetype2/freetype; \
@@ -26,6 +27,16 @@ RUN set -ex; \
     \
     docker-php-ext-install intl; \
     \
-    docker-php-ext-install pdo_mysql;
+    docker-php-ext-install pdo_mysql; \
+    \
+    pecl install mcrypt-1.0.1 \
+    docker-php-ext-enable mcrypt
+
+RUN set -ex; \
+    \
+    cd /tmp; \
+    curl -L -O https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmail_linux_amd64; \
+    mv mhsendmail_linux_amd64 /usr/bin/mhsendmail; \
+    echo 'sendmail_path = /usr/bin/mhsendmail --smtp-addr mailhog:1025' > /usr/local/etc/php/php.ini
 
 EXPOSE 9000
