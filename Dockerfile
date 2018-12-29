@@ -13,6 +13,7 @@ RUN set -ex; \
         zlib1g-dev \
         libzip-dev \
         libmcrypt-dev \
+        socat \
     ; \
     rm -rf /var/lib/apt/lists/*; \
     mkdir -p /usr/include/freetype2/freetype; \
@@ -39,5 +40,7 @@ RUN set -ex; \
     mv mhsendmail_linux_amd64 /usr/bin/mhsendmail; \
     chmod +x /usr/bin/mhsendmail; \
     echo 'sendmail_path = "/usr/bin/mhsendmail --smtp-addr=mailhog:1025"' > /usr/local/etc/php/conf.d/mailhog.ini
+
+CMD /usr/bin/socat TCP-LISTEN:8088,fork TCP:application:80
 
 EXPOSE 9000
