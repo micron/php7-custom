@@ -13,6 +13,7 @@ RUN set -ex; \
         zlib1g-dev \
         libzip-dev \
         libmcrypt-dev \
+        socat \
     ; \
     rm -rf /var/lib/apt/lists/*; \
     mkdir -p /usr/include/freetype2/freetype; \
