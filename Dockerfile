@@ -1,4 +1,4 @@
-FROM php:7.1.28-fpm
+FROM php:7.3.4-fpm
 MAINTAINER miron.ogrodowicz@kreativrudel.de
 
 RUN set -ex; \
@@ -29,7 +29,7 @@ RUN set -ex; \
     \
     docker-php-ext-install pdo_mysql; \
     \
-    pecl install mcrypt-1.0.0 \
+    pecl install mcrypt-1.0.2 \
     docker-php-ext-enable mcrypt
 
 RUN set -ex; \
