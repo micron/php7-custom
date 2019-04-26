@@ -1,4 +1,4 @@
-FROM php:7.2.4-fpm
+FROM php:7.2.17-fpm
 MAINTAINER miron.ogrodowicz@kreativrudel.de
 
 RUN set -ex; \
