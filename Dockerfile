@@ -30,7 +30,7 @@ RUN set -ex; \
     \
     docker-php-ext-install pdo_mysql; \
     \
-    pecl install mcrypt-1.0.1 \
+    pecl install mcrypt-1.0.1; \
     docker-php-ext-enable mcrypt
 
 RUN set -ex; \
@@ -47,6 +47,18 @@ RUN set -ex; \
     tar zxvf multirun-ubuntu-0.3.0.tar.gz; \
     mv multirun /bin; \
     rm multirun-ubuntu-0.3.0.tar.gz
+
+RUN set -ex; \
+    \
+    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar; \
+    chmod +x wp-cli.phar; \
+    mv wp-cli.phar /bin/wp
+
+RUN set -ex; \
+    \
+    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"; \
+    php composer-setup.php --filename=composer --install-dir=/bin/ --version=1.9.1; \
+    php -r "unlink('composer-setup.php');"
 
 CMD ["multirun", "php-fpm", "socat TCP-LISTEN:8088,fork TCP:application:80"]
 
