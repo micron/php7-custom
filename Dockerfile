@@ -52,6 +52,4 @@ RUN set -ex; \
     php composer-setup.php --filename=composer --install-dir=/bin/ --version=1.9.1; \
     php -r "unlink('composer-setup.php');"
 
-CMD ["multirun", "php-fpm", "socat TCP-LISTEN:8088,fork TCP:application:80"]
-
 EXPOSE 9000
