@@ -1,4 +1,4 @@
-FROM php:7.2.4-fpm
+FROM php:7.3.13-fpm
 MAINTAINER miron.ogrodowicz@kreativrudel.de
 
 RUN set -ex; \
@@ -13,7 +13,6 @@ RUN set -ex; \
         zlib1g-dev \
         libzip-dev \
         libmcrypt-dev \
-        socat \
     ; \
     rm -rf /var/lib/apt/lists/*; \
     mkdir -p /usr/include/freetype2/freetype; \
@@ -30,7 +29,7 @@ RUN set -ex; \
     \
     docker-php-ext-install pdo_mysql; \
     \
-    pecl install mcrypt-1.0.1; \
+    pecl install mcrypt-1.0.2; \
     docker-php-ext-enable mcrypt
 
 RUN set -ex; \
@@ -43,13 +42,6 @@ RUN set -ex; \
 
 RUN set -ex; \
     \
-    curl -L -s -O https://github.com/nicolas-van/multirun/releases/download/0.3.0/multirun-ubuntu-0.3.0.tar.gz; \
-    tar zxvf multirun-ubuntu-0.3.0.tar.gz; \
-    mv multirun /bin; \
-    rm multirun-ubuntu-0.3.0.tar.gz
-
-RUN set -ex; \
-    \
     curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar; \
     chmod +x wp-cli.phar; \
     mv wp-cli.phar /bin/wp
@@ -59,7 +51,5 @@ RUN set -ex; \
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"; \
     php composer-setup.php --filename=composer --install-dir=/bin/ --version=1.9.1; \
     php -r "unlink('composer-setup.php');"
-
-CMD ["multirun", "php-fpm", "socat TCP-LISTEN:8088,fork TCP:application:80"]
 
 EXPOSE 9000
